@@ -2,7 +2,6 @@ import React, { Children } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import App from './App';
 import './index.css';
 import axios from "axios";
 import {
@@ -12,18 +11,29 @@ import {
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Dashboard from './pages/dashboard';
+import PengolahanData from './pages/pengolahanData';
+import ReportData from './pages/reportData';
+import Koordinator from './pages/koordinator';
+import EditData from './pages/editData';
+import InputData from './pages/inputData';
 
 axios.defaults.withCredentials = true;
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-const Layout = ({children}) =>{
-  return(
-    <>
-    <Navbar />
-    {children}
-    </>
+const Layout = ({ children }) => {
+  return (
+
+    <body className='flex w-screen'>
+      <div className="w-2/12">
+        <Navbar />
+      </div>
+      <div className='w-10/12'>
+        {children}
+      </div>
+    </body>
+
 
   )
 }
@@ -31,11 +41,35 @@ const Layout = ({children}) =>{
 const router = createBrowserRouter([
   {
     path: "/",
+    element: (<Layout><p>Welcome</p></Layout>),
+  },
+  {
+    path: "/dashboard",
     element: (<Layout><Dashboard /></Layout>),
   },
   {
     path: "/login",
-    element: (<Layout><Login /></Layout>),
+    element: (<Login />),
+  },
+  {
+    path: "/input-data",
+    element: (<Layout><InputData /></Layout>),
+  },
+  {
+    path: "/pengolahan-data",
+    element: (<Layout><PengolahanData /></Layout>),
+  },
+  {
+    path: "/report-data",
+    element: (<Layout><ReportData /></Layout>),
+  },
+  {
+    path: "/koordinator",
+    element: (<Layout><Koordinator /></Layout>),
+  },
+  {
+    path: "/edit-data/:idKtp", 
+    element: (<Layout><EditData /></Layout>), 
   },
 ]);
 
