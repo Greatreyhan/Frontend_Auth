@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PopUpAddKoordinator from '../components/popUpAddKoordinator'
 import axios from 'axios';
+import Alert from '../utils/alert';
 
 const Koordinator = () => {
   const [popUpAdd, setPopUpAdd] = useState(false)
   const [coordinatorData, setCoordinatorData] = useState(null)
+  const [alertMsg, setAlertMsg] = useState("")
+
 
   // Get KTP Record
   useEffect(() => {
@@ -17,7 +20,8 @@ const Koordinator = () => {
       setCoordinatorData(response.data);
     }
     catch (error) {
-      console.log(error)
+      // console.log(error)
+      setAlertMsg(error?.message)
     }
 
   };
@@ -28,7 +32,8 @@ const Koordinator = () => {
       console.log(response)
     }
     catch (error) {
-      console.log(error)
+      setAlertMsg(error?.message)
+      // console.log(error)
     }
     finally {
       setPopUpAdd(true)
@@ -39,6 +44,8 @@ const Koordinator = () => {
 
   return (
     <div>
+      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
+
       {popUpAdd ?
         <PopUpAddKoordinator popUpAdd={popUpAdd} setPopUpAdd={setPopUpAdd} />
         : null}
@@ -90,7 +97,7 @@ const Koordinator = () => {
                           </p>
                         </td>
                         <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                          <a onClick={()=>deleteKoordinator(user.uuid)} class="text-indigo-600 cursor-pointer hover:text-indigo-900">
+                          <a onClick={() => deleteKoordinator(user.uuid)} class="text-indigo-600 cursor-pointer hover:text-indigo-900">
                             Hapus
                           </a>
                         </td>

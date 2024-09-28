@@ -16,6 +16,7 @@ import ReportData from './pages/reportData';
 import Koordinator from './pages/koordinator';
 import EditData from './pages/editData';
 import InputData from './pages/inputData';
+import Navigation from './components/navigation';
 
 axios.defaults.withCredentials = true;
 
@@ -26,10 +27,11 @@ const Layout = ({ children }) => {
   return (
 
     <body className='flex w-screen'>
+      <Navigation />
       <div className="w-2/12">
         <Navbar />
       </div>
-      <div className='w-10/12'>
+      <div className='w-10/12 pt-16'>
         {children}
       </div>
     </body>

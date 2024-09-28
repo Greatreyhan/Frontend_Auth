@@ -4,6 +4,8 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import { useParams } from 'react-router-dom';
 
 const EditData = () => {
+
+
     // KTP Record Data
     const [KTPRecord, setKTPRecord] = useState([])
     const [dataNIK, setDataNIK] = useState('')

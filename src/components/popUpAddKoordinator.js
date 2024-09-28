@@ -7,7 +7,8 @@ const PopUpAddKoordinator = ({ popUpAdd, setPopUpAdd }) => {
   const [emailKoordinator, setEmailKoordinator] = useState('')
   const [passwordKoordinator, setPasswordKoordinator] = useState('')
 
-  const createNewKoordinator = async () => {
+  const createNewKoordinator = async (e) => {
+    e.preventDefault()
     const dataInput = {
       name: namaKoordinator,
       email: emailKoordinator,
@@ -48,7 +49,7 @@ const PopUpAddKoordinator = ({ popUpAdd, setPopUpAdd }) => {
             </div>
           </div>
           <div className="mt-6">
-            <form className="w-full space-y-6" onSubmit={createNewKoordinator}>
+            <form className="w-full space-y-6">
               <div className="w-full">
                 <div className="relative ">
                   <label className='text-sm text-gray-900 mb-2'>Nama Koordinator</label>
@@ -90,7 +91,7 @@ const PopUpAddKoordinator = ({ popUpAdd, setPopUpAdd }) => {
                   <button onClick={() => setPopUpAdd(!popUpAdd)} type="button" className="py-2 px-4 text-gray-900 w-full transition ease-in duration-200 text-center text-base font-semibold ">
                     Kembali
                   </button>
-                  <button type="submit" className="py-2 px-4  bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 focus:ring-offset-rose-200 text-gray-100 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                  <button onClick={(e)=>createNewKoordinator(e)} type="submit" className="py-2 px-4  bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 focus:ring-offset-rose-200 text-gray-100 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                     Tambahkan
                   </button>
                 </span>
