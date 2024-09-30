@@ -51,6 +51,22 @@ const InputData = () => {
       file_name: ("http://localhost:4000" + fileKTP)
     }
 
+    // Check if any value is an empty string
+    const isValid = Object.values(dataInput).every(value => value !== "");
+
+    // Output result
+    if (!isValid) {
+      setAlertMsg("Input tidak boleh kosong!")
+      setIsLoading(false)
+      return ;
+    } 
+
+    if(fileKTP == ""){
+      setAlertMsg("Silahkan masukkan gambar KTP")
+      setIsLoading(false)
+      return ;
+    }
+
     try {
       const response = await axios.post("http://localhost:4000/ktp", dataInput)
       if (response.status === 201) {
@@ -77,7 +93,8 @@ const InputData = () => {
     e.preventDefault()
     setIsLoading(true)
     if (!fileKTP) {
-      alert('Please select a file first!');
+      setAlertMsg("Silahkan masukkan gambar KTP!")
+      setIsLoading(false)
       return;
     }
     const formData = new FormData();
@@ -167,7 +184,7 @@ const InputData = () => {
             <input required={true} type="text" id="dataNama" value={dataNama} onChange={(e) => setDataNama(e.currentTarget.value)} className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-rose-600 focus:border-transparent" placeholder="Nama Anda" />
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='md:flex justify-between'>
           <div className="flex flex-col mb-2 flex-1">
             <label className='text-sm text-gray-800 mb-2'>Tempat Lahir</label>
             <div className="flex relative ">
@@ -177,8 +194,8 @@ const InputData = () => {
               <input required={true} type="text" id="dataTempatLahir" value={dataTempatLahir} onChange={(e) => setDataTempatLahir(e.currentTarget.value)} className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-rose-600 focus:border-transparent" placeholder="Tempat Lahir" />
             </div>
           </div>
-          <div className="flex flex-col mb-2 flex-1 ml-4">
-            <label className='text-sm text-gray-800 mb-2 ml-'>Tanggal Lahir</label>
+          <div className="flex flex-col mb-2 flex-1 md:ml-4">
+            <label className='text-sm text-gray-800 mb-2'>Tanggal Lahir</label>
             <div className="flex relative ">
               <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                 <MdDriveFileRenameOutline />
@@ -187,7 +204,7 @@ const InputData = () => {
             </div>
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='md:flex justify-between'>
           <div className="flex flex-col mb-2 flex-1">
             <label className="text-sm text-gray-800 mb-2">Jenis Kelamin</label>
             <div className="flex relative">
@@ -201,7 +218,7 @@ const InputData = () => {
               </select>
             </div>
           </div>
-          <div className="flex flex-col mb-2 flex-1 ml-4">
+          <div className="flex flex-col mb-2 flex-1 md:ml-4">
             <label className="text-sm text-gray-800 mb-2">Golongan Darah</label>
             <div className="flex relative">
               <span className="rounded-l-md inline-flex items-center px-3 border-t bg-white border-l border-b border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -219,15 +236,15 @@ const InputData = () => {
           <div>
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='md:flex justify-between'>
           <div className="col-span-2 flex-1">
-            <label className='text-sm text-gray-800 mb-2 ml-'>Alamat</label>
+            <label className='text-sm text-gray-800 mb-2'>Alamat</label>
             <textarea value={dataAlamat} onChange={(e) => setDataAlamat(e.currentTarget.value)} className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-rose-600 focus:border-transparent" id="comment" placeholder="Masukan Alamat Anda" name="dataAlamat" rows="7" cols="40">
             </textarea>
           </div>
-          <div className='ml-4 flex-1'>
+          <div className='md:ml-4 flex-1'>
             <div className="flex flex-col mb-2 flex-1">
-              <label className='text-sm text-gray-800 mb-2 ml-'>RT/RW</label>
+              <label className='text-sm text-gray-800 mb-2'>RT/RW</label>
               <div className="flex relative ">
                 <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                   <MdDriveFileRenameOutline />
@@ -245,7 +262,7 @@ const InputData = () => {
               </div>
             </div>
             <div className="flex flex-col mb-2 flex-1">
-              <label className='text-sm text-gray-800 mb-2 ml-'>Kecamatan</label>
+              <label className='text-sm text-gray-800 mb-2'>Kecamatan</label>
               <div className="flex relative ">
                 <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                   <MdDriveFileRenameOutline />
@@ -255,7 +272,7 @@ const InputData = () => {
             </div>
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='md:flex justify-between'>
 
           <div className="flex flex-col mb-2 flex-1">
             <label className="text-sm text-gray-800 mb-2">Agama</label>
@@ -274,7 +291,7 @@ const InputData = () => {
             </div>
           </div>
 
-          <div className="flex flex-col mb-2 flex-1 ml-4">
+          <div className="flex flex-col mb-2 flex-1 md:ml-4">
             <label className="text-sm text-gray-800 mb-2">Status Perkawinan</label>
             <div className="flex relative">
               <span className="rounded-l-md inline-flex items-center px-3 border-t bg-white border-l border-b border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -292,7 +309,7 @@ const InputData = () => {
           <div>
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='md:flex justify-between'>
 
           <div className="flex flex-col mb-2 flex-1">
             <label className='text-sm text-gray-800 mb-2'>Pekerjaan</label>
@@ -304,7 +321,7 @@ const InputData = () => {
             </div>
           </div>
 
-          <div className="flex flex-col mb-2 flex-1 ml-4">
+          <div className="flex flex-col mb-2 flex-1 md:ml-4">
             <label className="text-sm text-gray-800 mb-2">Kewarganegaraan</label>
             <div className="flex relative">
               <span className="rounded-l-md inline-flex items-center px-3 border-t bg-white border-l border-b border-gray-300 text-gray-500 shadow-sm text-sm">

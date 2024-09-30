@@ -33,20 +33,19 @@ const Dashboard = () => {
     <div className='w-full px-8 py-8'>
       <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
       <h1 className='text-3xl font-black text-gray-400'>Laporan Terbaru</h1>
-      <div className='flex justify-around mt-8 gap-5'>
+      <div className='flex md:flex-row flex-col justify-around mt-8 gap-5'>
 
         {/* Data Total */}
-        <div>
+        <div className='px-8 md:w-3/12 w-6/12 bg-gray-100 py-6 rounded-3xl'>
           <p className='text-gray-900'>Total KTP</p>
           <div className='flex text-gray-900 items-center mt-2'>
             <MdPersonAddAlt1 className='text-4xl mr-2' />
             <p className='text-5xl font-semibold text-rose-700'>{totalRecords?.data}</p>
           </div>
-          <p className='text-xs text-gray-800 bg-gray-100 mt-2 px-4 py-1 rounded-full inline-block'>Jun 1 - Aug 1 2024</p>
         </div>
 
         {/* Sebaran Terbanyak */}
-        <div className='px-8 w-3/12 bg-gray-100 py-6 rounded-3xl'>
+        <div className='px-8 md:w-3/12 w-6/12 bg-gray-100 py-6 rounded-3xl'>
           <div className='text-gray-900'>
             <p className='font-semibold text-sm text-gray-600'>Total Administrasi</p>
             <div className='flex items-end mt-2'>
@@ -58,7 +57,7 @@ const Dashboard = () => {
         </div>
 
         {/* Sebaran Terkecil */}
-        <div className='px-8 w-3/12 bg-gray-100 py-6 rounded-3xl'>
+        <div className='px-8 md:w-3/12 w-6/12 bg-gray-100 py-6 rounded-3xl'>
           <div className='text-gray-900'>
             <p className='font-semibold text-sm text-gray-600'>Total Koordinator</p>
             <div className='flex items-end mt-2'>

@@ -28,10 +28,10 @@ const Layout = ({ children }) => {
 
     <body className='flex w-screen'>
       <Navigation />
-      <div className="w-2/12">
+      <div className="md:w-2/12">
         <Navbar />
       </div>
-      <div className='w-10/12 pt-16'>
+      <div className='md:w-10/12 w-full pt-16'>
         {children}
       </div>
     </body>

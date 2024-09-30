@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LoginUser, reset } from "../features/authSlice"
-
+import Loading from '../utils/loading';
+import Alert from '../utils/alert';
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [alertMsg, setAlertMsg] = useState("")
+  const [load, setLoad] = useState(false)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isError, isSuccess, isLoading, message } = useSelector((state) => state.auth)
 
   const Auth = (e) => {
+    setLoad(true)
     e.preventDefault()
     dispatch(LoginUser({ email, password }))
+    setLoad(false)
   }
 
   useEffect(() => {
@@ -23,10 +28,13 @@ const Login = () => {
     // else {
       dispatch(reset())
     // }
+    if(isError) setAlertMsg(message)
   }, [user, isSuccess, isError, isLoading])
   return (
 
     <div className='flex justify-center items-center w-screen h-screen'>
+      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
+      {load && <Loading />}
       <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow  sm:px-6 md:px-8 lg:px-10">
         <div className="self-center mb-6 ">
           <p className='text-xl font-semibold text-gray-800 sm:text-2xl'>Selamat Data di <span className='text-rose-700'>Plasma Data</span></p>
